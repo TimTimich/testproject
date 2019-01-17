@@ -15,22 +15,23 @@ public class mining : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetButtonDown("Fire1"))
-			{
-				RaycastHit hit;
-			if(Physics.Raycast(cam.transform.position,cam.transform.forward,out hit,range))
-			{
+		if (Input.GetButtonDown ("Fire1")) {
+			RaycastHit hit;
+			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, range)) {
 				if (hit.transform.CompareTag ("interact")) {
 					health hep = hit.transform.GetComponent<health> ();
 					hep.hp -= damage;
 					Debug.Log (hep.hp);
 					if (hep.hp <= 0) {
 						Debug.Log ("killed");
+						Destroy (hit.collider.gameObject);
+						//Destroy (hit);
 					}
 
-				}
 					
+					
+				}
 			}
-	}
-}
-}
+		}
+
+	}}

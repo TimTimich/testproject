@@ -8,6 +8,7 @@ public class movement : MonoBehaviour {
 	public float jump;
 	public float fallm=2.5f;
 	public Rigidbody rb;
+
 	// Use this for initialization
 	void Start () {
 		
