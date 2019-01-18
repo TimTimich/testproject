@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class health : MonoBehaviour {
 	public float hp = 100f;
+	public string mat;
 	// Use this for initialization
 	void Start () {
 		
