@@ -15,7 +15,7 @@ public class movement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (Input.GetButtonDown ("Jump")) {
 			Debug.Log ("pressed");
 			rb.velocity = Vector3.up * jump;

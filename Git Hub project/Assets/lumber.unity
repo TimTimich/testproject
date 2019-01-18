@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e01a6ed1b0d37948bb1a49ec5c81540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 50
+  hp: 89.43
 --- !u!23 &271530593
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -161,7 +161,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 0}
   - {fileID: 2100000, guid: 13fed679bbce5b04eb3c87aa24a75e1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -308,6 +307,7 @@ GameObject:
   - component: {fileID: 516877836}
   - component: {fileID: 516877838}
   - component: {fileID: 516877837}
+  - component: {fileID: 516877839}
   m_Layer: 5
   m_Name: InventoryBackground
   m_TagString: Untagged
@@ -331,7 +331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 297, y: -3.9}
+  m_AnchoredPosition: {x: 297, y: -3.899994}
   m_SizeDelta: {x: -148.5, y: 290.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &516877837
@@ -367,6 +367,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 516877835}
+--- !u!114 &516877839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 516877835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a50caee0efc82445958619551756c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 516877835}
 --- !u!1 &532227704
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +470,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 23760058871245226, guid: 04e84f3b115945a4eacca211f6feeba3,
+        type: 2}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4493303103335080, guid: 04e84f3b115945a4eacca211f6feeba3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -494,6 +511,16 @@ Prefab:
       propertyPath: m_Name
       value: Wood
       objectReference: {fileID: 0}
+    - target: {fileID: 23760058871245226, guid: 04e84f3b115945a4eacca211f6feeba3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13fed679bbce5b04eb3c87aa24a75e1e, type: 2}
+    - target: {fileID: 23760058871245226, guid: 04e84f3b115945a4eacca211f6feeba3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13fed679bbce5b04eb3c87aa24a75e1e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04e84f3b115945a4eacca211f6feeba3, type: 2}
   m_IsPrefabParent: 0
@@ -874,6 +901,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 23716773199478632, guid: 67b46a3198cb73149a8d76cebb86f9d9,
+        type: 2}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4691703830115664, guid: 67b46a3198cb73149a8d76cebb86f9d9, type: 2}
       propertyPath: m_LocalPosition.x
       value: 3.4145904
@@ -914,6 +946,16 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 2100000, guid: 13fed679bbce5b04eb3c87aa24a75e1e, type: 2}
+    - target: {fileID: 23716773199478632, guid: 67b46a3198cb73149a8d76cebb86f9d9,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13fed679bbce5b04eb3c87aa24a75e1e, type: 2}
+    - target: {fileID: 114169736600353480, guid: 67b46a3198cb73149a8d76cebb86f9d9,
+        type: 2}
+      propertyPath: hp
+      value: 89.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67b46a3198cb73149a8d76cebb86f9d9, type: 2}
@@ -950,7 +992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -150}
+  m_AnchoredPosition: {x: 150, y: -120}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115250708

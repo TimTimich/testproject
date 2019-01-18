@@ -10,6 +10,7 @@ public class cameracontroller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
@@ -24,6 +25,7 @@ public class cameracontroller : MonoBehaviour {
 		if(Input.GetKey(KeyCode.Tab))
 			{
 				Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
 			}
 				
 	}
