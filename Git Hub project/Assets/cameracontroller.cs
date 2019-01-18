@@ -22,11 +22,6 @@ public class cameracontroller : MonoBehaviour {
 		eyes.transform.localRotation = Quaternion.Euler(rotY, 0, 0);
 		//eyes.transform.Rotate(rotY, 0, 0);
 
-		if(Input.GetKey(KeyCode.Tab))
-			{
-				Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-			}
 				
 	}
 }

@@ -7,7 +7,7 @@ public class Popup : MonoBehaviour {
 	public cameracontroller camscipt;
 
 	void Start () {
-		panel.SetActive (!panel.activeSelf);
+		panel.SetActive (false);
 		camscipt = gameObject.GetComponent<cameracontroller> ();
 		//Cursor.visible = false;
 		}	
@@ -21,8 +21,8 @@ public class Popup : MonoBehaviour {
 			panel.SetActive (!panel.activeSelf);
 			camscipt.enabled = !camscipt.enabled;
 
-		} else if (camscipt.enabled == true) {
-			Cursor.lockState = CursorLockMode.Confined;
+		} else if (panel.activeSelf == false) {
+			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
 			
