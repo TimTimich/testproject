@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class health : MonoBehaviour {
+public class healthobject : MonoBehaviour {
 	public float hp = 100f;
 	public string mat;
 	// Use this for initialization
