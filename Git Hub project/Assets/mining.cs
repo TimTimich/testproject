@@ -9,6 +9,7 @@ public class mining : MonoBehaviour {
 	public float reset = 0.5f;
 	public float firerate = 1f;
 
+
 	private float nextimetofire=0f;
 
 	public Camera cam;
@@ -20,19 +21,20 @@ public class mining : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("Fire1")&&Time.time >= nextimetofire) {
+		if (Input.GetButton ("Fire1")&&Time.time >= nextimetofire) {
 			nextimetofire = Time.time + 1f / firerate;
 			RaycastHit hit;
 			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, range)) {
 				if (hit.transform.CompareTag ("interact")) {
 					healthobject hep = hit.transform.GetComponent<healthobject> ();
+					Vector2 hitgive = hep.reward;
 					hep.hp -= damage;
 					Debug.Log (hep.hp);
 					if (hep.mat == "MatWood") {
-						inv.woodcount += Random.Range (7, 9);
+						inv.woodcount += Random.Range (hitgive.x,hitgive.y);
 					}
 					else if (hep.mat == "MatStone") {
-						inv.stonecount += Random.Range (5, 7);
+						inv.stonecount += Random.Range (hitgive.x,hitgive.y);
 					}
 					if (hep.hp <= 0) {
 						Debug.Log ("killed");
