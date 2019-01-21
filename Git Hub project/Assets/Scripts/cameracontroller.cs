@@ -24,4 +24,12 @@ public class cameracontroller : MonoBehaviour {
 
 				
 	}
+
+	/*void OnCollisionEnter(Collision coll)
+	{
+		gameObject.GetComponent<Rigidbody>().velocity= new Vector3(0,0,0);
+		print ("touched");
+	}
+	*/
+
 }

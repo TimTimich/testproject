@@ -25,4 +25,5 @@ public class movement : MonoBehaviour {
 		float strafe = Input.GetAxisRaw ("Horizontal") * speed * Time.deltaTime;
 		transform.Translate (strafe, 0, translation);
 	}
+
 }
