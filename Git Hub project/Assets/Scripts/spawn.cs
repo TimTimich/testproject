@@ -13,6 +13,8 @@ public class spawn : MonoBehaviour {
 	public Vector3 leavesallowed;
 	public float growrate = 0.0001f;
 	private bool allowregenrate = true;
+	[SerializeField]
+	public bool killed = false;
 
 	public Vector3 offset = new Vector3 (0, 1f, 0);
 	[SerializeField]
@@ -20,6 +22,7 @@ public class spawn : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		killed = false;
 		gameObject.GetComponent<MeshRenderer> ().enabled = false;
 		xstart = tospawn.transform.localScale.x*2;
 		ystart = tospawn.transform.localScale.y*2;
@@ -38,33 +41,53 @@ public class spawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (healthscript.growing == true) {
-			if (clonedversion.transform.localScale.x < maxgrowscale.x) {
-				if (allowregenrate == true) {
-					if (healthscript.hp < totalhp) {
-						healthscript.hp += growrate * 2;
-					} else {
-						Mathf.Round (healthscript.hp);
-						allowregenrate = false;
-					
-					}
-				}
-				//print(healthscript.hp);
-				healthscript.growing = true;
-				clonedversion.transform.localScale += new Vector3 (growrate * Time.deltaTime, growrate * Time.deltaTime, growrate * Time.deltaTime);
-				clonedversion.transform.position += new Vector3 (0f, growrate * 0.03f, 0f);
-				if (clonedversion.transform.localScale.x > leavesallowed.x) {
-					leaves.enabled = true;
-				}
-			} else if (clonedversion.transform.localScale.x > maxgrowscale.x) {
+		if (killed == false) {
+			if (healthscript.growing == true) {
+				if (clonedversion.transform.localScale.x < maxgrowscale.x) {
+					if (allowregenrate == true) {
+						if (healthscript.hp < totalhp) {
+							healthscript.hp += growrate * 2;
+						} else {
+							Mathf.Round (healthscript.hp);
+							allowregenrate = false;
 
-				healthscript.growing = false;
-				print (healthscript.growing);
+						}
+					}
+					//print(healthscript.hp);
+					healthscript.growing = true;
+					clonedversion.transform.localScale += new Vector3 (growrate * Time.deltaTime, growrate * Time.deltaTime, growrate * Time.deltaTime);
+					clonedversion.transform.position += new Vector3 (0f, growrate * 0.03f, 0f);
+					if (clonedversion.transform.localScale.x > leavesallowed.x) {
+						leaves.enabled = true;
+					}
+				} else if (clonedversion.transform.localScale.x > maxgrowscale.x) {
+
+					healthscript.growing = false;
+					print (healthscript.growing);
+				}
+			} else if (healthscript.growing == false) {
+				
 			}
-		} else if (healthscript.growing == false) {
-			print ("done growing");
+		} else {
+			StartCoroutine (Test ());
+
+
 		}
+		killed = false;
+
+
 
 	}
+
+	IEnumerator Test()
+	{
+		
+		print ("wait has started");
+		StopCoroutine (Test());
+		yield return new WaitForSeconds (180);
+		Start ();
+
+	}
+	
 
 }

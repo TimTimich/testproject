@@ -27,6 +27,7 @@ public class mining : MonoBehaviour {
 			RaycastHit hit;
 			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, range)) {
 				if (hit.transform.CompareTag ("interact")) {
+					spawnscript = hit.transform.parent.transform.parent.GetComponent<spawn> ();
 					healthobject hep = hit.transform.GetComponent<healthobject> ();
 					Vector2 endhitgive = hep.endreward;
 					Vector2 beginhitgive = hep.beginreward;
@@ -51,7 +52,9 @@ public class mining : MonoBehaviour {
 						}
 					}
 					if (hep.hp <= 0) {
+						spawnscript.killed = true;
 						hep.growing = false;
+
 						Debug.Log ("killed");
 						Destroy (target.gameObject);
 						//Destroy (hit);
