@@ -15,6 +15,7 @@ public class spawn : MonoBehaviour {
 	private bool allowregenrate = true;
 	[SerializeField]
 	public bool killed = false;
+	private Quaternion quaternion;
 
 	public Vector3 offset = new Vector3 (0, 1f, 0);
 	[SerializeField]
@@ -29,7 +30,7 @@ public class spawn : MonoBehaviour {
 		zstart = tospawn.transform.localScale.z*2;
 
 
-		clonedversion = Instantiate(tospawn, gameObject.transform.position+offset, gameObject.transform.rotation);
+		clonedversion = Instantiate(tospawn, gameObject.transform.position+offset, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
 		clonedversion.transform.SetParent(gameObject.transform,true);
 		clonedversion.transform.localScale = new Vector3 (xstart, ystart, zstart);
 		healthscript = clonedversion.GetComponentInChildren<healthobject> ();
@@ -46,7 +47,7 @@ public class spawn : MonoBehaviour {
 				if (clonedversion.transform.localScale.x < maxgrowscale.x) {
 					if (allowregenrate == true) {
 						if (healthscript.hp < totalhp) {
-							healthscript.hp += growrate * 2;
+							healthscript.hp += growrate*3/5;
 						} else {
 							Mathf.Round (healthscript.hp);
 							allowregenrate = false;
