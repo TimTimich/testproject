@@ -109,3 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 50
+  mat: 
+  reward: {x: 5, y: 6}
+  target: {fileID: 0}

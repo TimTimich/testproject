@@ -6,6 +6,7 @@ TagManager:
   tags:
   - interact
   - WoodLog
+  - spawn
   layers:
   - Default
   - TransparentFX

@@ -28,6 +28,7 @@ public class mining : MonoBehaviour {
 				if (hit.transform.CompareTag ("interact")) {
 					healthobject hep = hit.transform.GetComponent<healthobject> ();
 					Vector2 hitgive = hep.reward;
+					GameObject target = hep.target;
 					hep.hp -= damage;
 					Debug.Log (hep.hp);
 					if (hep.mat == "MatWood") {
@@ -38,7 +39,7 @@ public class mining : MonoBehaviour {
 					}
 					if (hep.hp <= 0) {
 						Debug.Log ("killed");
-						Destroy (hit.collider.gameObject);
+						Destroy (target);
 						//Destroy (hit);
 					}
 

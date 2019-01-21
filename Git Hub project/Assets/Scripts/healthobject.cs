@@ -6,6 +6,7 @@ public class healthobject : MonoBehaviour {
 	public float hp = 100f;
 	public string mat;
 	public Vector2 reward = new Vector2(5f,6f);
+	public GameObject target;
 	// Use this for initialization
 	void Start () {
 		
