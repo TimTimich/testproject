@@ -29,9 +29,9 @@ public class spawn : MonoBehaviour {
 	// Use this for initialization
 	IEnumerator Start () {
 		started = true;
+		allowregenrate = true;
 		gameObject.GetComponent<MeshRenderer> ().enabled = false;
-		yield return new WaitForSeconds(Random.Range(1,1));
-		print ("wait has ended");
+		yield return new WaitForSeconds(Random.Range(5,30));
 		
 		killed = false;
 
@@ -49,6 +49,7 @@ public class spawn : MonoBehaviour {
 		leaves.enabled = false;
 		healthscript.hp = 1f;
 		totalhp = healthscript.maxhp;
+		healthscript.hp = totalhp/100;
 		beginreward = new Vector2(1f,1f);
 		endreward = new Vector2(5f,6f);
 		started = false;
@@ -65,7 +66,6 @@ public class spawn : MonoBehaviour {
 							if (healthscript.hp < totalhp) {
 								healthscript.hp += growrate*2/5;
 							} else {
-								Mathf.Round (healthscript.hp);
 								allowregenrate = false;
 
 							}
@@ -78,11 +78,12 @@ public class spawn : MonoBehaviour {
 							leaves.enabled = true;
 						}
 					} else if (clonedversion.transform.localScale.x > maxgrowscale.x) {
-
+						Mathf.Round (healthscript.hp);
 						healthscript.growing = false;
+						healthscript.hp = totalhp;
 					}
 				} else if (healthscript.growing == false) {
-
+					Mathf.Round (healthscript.hp);
 				}
 			} else {
 				StartCoroutine (Test ());
@@ -102,7 +103,7 @@ public class spawn : MonoBehaviour {
 		
 		print ("wait has started");
 		StopCoroutine (Test());
-		yield return new WaitForSeconds (Random.Range(5,10));
+		yield return new WaitForSeconds (Random.Range(1,1));
 		print ("wait has ended");
 		StartCoroutine (Start());
 

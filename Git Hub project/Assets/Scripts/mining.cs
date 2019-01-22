@@ -51,6 +51,7 @@ public class mining : MonoBehaviour {
 					Vector2 beginhitgive = spawnscript.beginreward;
 					GameObject target = hep.target;
 					hep.hp -= damage;
+					Mathf.RoundToInt (hep.hp);
 					Debug.Log (hep.hp);
 					clonedversion.GetComponentInChildren<Text>().text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
 					clonedversion.GetComponentInChildren<Image>().fillAmount = hep.hp/ hep.maxhp;
