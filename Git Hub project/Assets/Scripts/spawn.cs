@@ -17,6 +17,9 @@ public class spawn : MonoBehaviour {
 	public bool killed = false;
 	private Quaternion quaternion;
 
+	public Vector2 beginreward = new Vector2(1f,1f);
+	public Vector2 endreward = new Vector2(5f,6f);
+
 	public Vector3 offset = new Vector3 (0, 1f, 0);
 	[SerializeField]
 	private float xstart, ystart, zstart;
@@ -24,6 +27,7 @@ public class spawn : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		killed = false;
+
 		gameObject.GetComponent<MeshRenderer> ().enabled = false;
 		xstart = tospawn.transform.localScale.x*2;
 		ystart = tospawn.transform.localScale.y*2;
@@ -38,6 +42,8 @@ public class spawn : MonoBehaviour {
 		leaves.enabled = false;
 		healthscript.hp = 1f;
 		totalhp = healthscript.maxhp;
+		beginreward = new Vector2(1f,1f);
+		endreward = new Vector2(5f,6f);
 	}
 	
 	// Update is called once per frame
@@ -47,7 +53,7 @@ public class spawn : MonoBehaviour {
 				if (clonedversion.transform.localScale.x < maxgrowscale.x) {
 					if (allowregenrate == true) {
 						if (healthscript.hp < totalhp) {
-							healthscript.hp += growrate*3/5;
+							healthscript.hp += growrate*2/5;
 						} else {
 							Mathf.Round (healthscript.hp);
 							allowregenrate = false;

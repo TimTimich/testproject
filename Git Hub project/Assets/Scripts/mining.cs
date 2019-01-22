@@ -5,6 +5,7 @@ using UnityEngine;
 public class mining : MonoBehaviour {
 
 	public spawn spawnscript;
+	public Canvas healthcavas;
 	public float damage = 10f;
 	public float range = 5f;
 	public float reset = 0.5f;
@@ -27,14 +28,18 @@ public class mining : MonoBehaviour {
 			RaycastHit hit;
 			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, range)) {
 				if (hit.transform.CompareTag ("interact")) {
+					healthcavas.transform.position = cam.ScreenToWorldPoint(Input.mousePosition + new Vector3(0f,0f,+2f));
+
+					healthcavas.transform.rotation= Quaternion.Euler(healthcavas.transform.rotation.x*-1,healthcavas.transform.rotation.y-180,0);
+					healthcavas.transform.LookAt (cam.transform.position);
 					spawnscript = hit.transform.parent.transform.parent.GetComponent<spawn> ();
 					healthobject hep = hit.transform.GetComponent<healthobject> ();
-					Vector2 endhitgive = hep.endreward;
-					Vector2 beginhitgive = hep.beginreward;
+					Vector2 endhitgive = spawnscript.endreward;
+					Vector2 beginhitgive = spawnscript.beginreward;
 					GameObject target = hep.target;
 					hep.hp -= damage;
 					Debug.Log (hep.hp);
-					if (hep.hp >= hep.maxhp*(3/4)) {
+					if (hep.hp >= hep.maxhp*(2/4)) {
 						
 						if (hep.mat == "MatWood") {
 							inv.woodcount += Random.Range (endhitgive.x, endhitgive.y);
@@ -43,7 +48,7 @@ public class mining : MonoBehaviour {
 						}
 					}
 
-					else if (hep.hp <= hep.maxhp*(3/4)) {
+					else if (hep.hp <= hep.maxhp*(2/4)) {
 
 						if (hep.mat == "MatWood") {
 							inv.woodcount += Random.Range (beginhitgive.x, beginhitgive.y);
