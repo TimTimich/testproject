@@ -98,7 +98,6 @@ public class mining : MonoBehaviour {
 		if (clonedversion != null) {
 			clonedversion.GetComponentInChildren<Text>().text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
 			barcloned.fillAmount = hep.hp/hep.maxhp;
-			print (barcloned.fillAmount);
 			clonedversion.transform.LookAt (cam.transform.position);
 			clonedversion.transform.localPosition = new Vector3 (0, -6f, 0);
 			clonedversion.transform.Translate (Vector3.forward * 1f);

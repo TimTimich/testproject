@@ -16,6 +16,7 @@ public class spawn : MonoBehaviour {
 	[SerializeField]
 	public bool killed = false;
 	private Quaternion quaternion;
+	private bool started = false;
 
 	public Vector2 beginreward = new Vector2(1f,1f);
 	public Vector2 endreward = new Vector2(5f,6f);
@@ -24,8 +25,14 @@ public class spawn : MonoBehaviour {
 	[SerializeField]
 	private float xstart, ystart, zstart;
 
+
 	// Use this for initialization
-	void Start () {
+	IEnumerator Start () {
+		started = true;
+		gameObject.GetComponent<MeshRenderer> ().enabled = false;
+		yield return new WaitForSeconds(Random.Range(1,1));
+		print ("wait has ended");
+		
 		killed = false;
 
 		gameObject.GetComponent<MeshRenderer> ().enabled = false;
@@ -44,43 +51,47 @@ public class spawn : MonoBehaviour {
 		totalhp = healthscript.maxhp;
 		beginreward = new Vector2(1f,1f);
 		endreward = new Vector2(5f,6f);
+		started = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (killed == false) {
-			if (healthscript.growing == true) {
-				clonedversion.transform.Rotate (0, 100f * Time.deltaTime, 0);
-				if (clonedversion.transform.localScale.x < maxgrowscale.x) {
-					if (allowregenrate == true) {
-						if (healthscript.hp < totalhp) {
-							healthscript.hp += growrate*2/5;
-						} else {
-							Mathf.Round (healthscript.hp);
-							allowregenrate = false;
+		if (started != true) {
+			if (killed == false) {
+				if (healthscript.growing == true) {
+					clonedversion.transform.Rotate (0, 100f * Time.deltaTime, 0);
+					if (clonedversion.transform.localScale.x < maxgrowscale.x) {
+						if (allowregenrate == true) {
+							if (healthscript.hp < totalhp) {
+								healthscript.hp += growrate*2/5;
+							} else {
+								Mathf.Round (healthscript.hp);
+								allowregenrate = false;
 
+							}
 						}
-					}
-					//print(healthscript.hp);
-					healthscript.growing = true;
-					clonedversion.transform.localScale += new Vector3 (growrate * Time.deltaTime, growrate * Time.deltaTime, growrate * Time.deltaTime);
-					clonedversion.transform.position += new Vector3 (0f, growrate * 0.03f, 0f);
-					if (clonedversion.transform.localScale.x > leavesallowed.x) {
-						leaves.enabled = true;
-					}
-				} else if (clonedversion.transform.localScale.x > maxgrowscale.x) {
+						//print(healthscript.hp);
+						healthscript.growing = true;
+						clonedversion.transform.localScale += new Vector3 (growrate * Time.deltaTime, growrate * Time.deltaTime, growrate * Time.deltaTime);
+						clonedversion.transform.position += new Vector3 (0f, growrate * 0.03f, 0f);
+						if (clonedversion.transform.localScale.x > leavesallowed.x) {
+							leaves.enabled = true;
+						}
+					} else if (clonedversion.transform.localScale.x > maxgrowscale.x) {
 
-					healthscript.growing = false;
+						healthscript.growing = false;
+					}
+				} else if (healthscript.growing == false) {
+
 				}
-			} else if (healthscript.growing == false) {
-				
+			} else {
+				StartCoroutine (Test ());
+
+
 			}
-		} else {
-			StartCoroutine (Test ());
-
-
+			killed = false;
 		}
-		killed = false;
+
 
 
 
@@ -91,10 +102,14 @@ public class spawn : MonoBehaviour {
 		
 		print ("wait has started");
 		StopCoroutine (Test());
-		yield return new WaitForSeconds (Random.Range(60,180));
-		Start ();
+		yield return new WaitForSeconds (Random.Range(5,10));
+		print ("wait has ended");
+		StartCoroutine (Start());
 
 	}
+
+
+
 	
 
 }
