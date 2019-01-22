@@ -147,7 +147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -98.79, y: 37.18}
+  m_AnchoredPosition: {x: -105.2, y: 37.18}
   m_SizeDelta: {x: -221.89, y: -119.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &31932001
@@ -398,8 +398,6 @@ MonoBehaviour:
   hp: 89.43
   maxhp: 100
   mat: MatStone
-  beginreward: {x: 2, y: 3}
-  endreward: {x: 5, y: 6}
   target: {fileID: 0}
   growing: 1
 --- !u!23 &271530593
@@ -2459,8 +2457,6 @@ MonoBehaviour:
   hp: 100
   maxhp: 100
   mat: MatWood
-  beginreward: {x: 2, y: 3}
-  endreward: {x: 5, y: 6}
   target: {fileID: 0}
   growing: 1
 --- !u!1001 &1432519196
@@ -2889,8 +2885,6 @@ MonoBehaviour:
   hp: 150
   maxhp: 100
   mat: MatStone
-  beginreward: {x: 2, y: 3}
-  endreward: {x: 5, y: 6}
   target: {fileID: 0}
   growing: 1
 --- !u!64 &1573323555
@@ -3002,8 +2996,6 @@ MonoBehaviour:
   hp: 150
   maxhp: 100
   mat: MatStone
-  beginreward: {x: 2, y: 3}
-  endreward: {x: 5, y: 6}
   target: {fileID: 0}
   growing: 1
 --- !u!23 &1603442685

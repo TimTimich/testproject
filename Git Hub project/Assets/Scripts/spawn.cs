@@ -78,12 +78,12 @@ public class spawn : MonoBehaviour {
 							leaves.enabled = true;
 						}
 					} else if (clonedversion.transform.localScale.x > maxgrowscale.x) {
-						Mathf.Round (healthscript.hp);
+						
 						healthscript.growing = false;
-						healthscript.hp = totalhp;
+
 					}
 				} else if (healthscript.growing == false) {
-					Mathf.Round (healthscript.hp);
+					
 				}
 			} else {
 				StartCoroutine (Test ());

@@ -51,7 +51,7 @@ public class mining : MonoBehaviour {
 					Vector2 beginhitgive = spawnscript.beginreward;
 					GameObject target = hep.target;
 					hep.hp -= damage;
-					Mathf.RoundToInt (hep.hp);
+					Mathf.Floor (hep.hp);
 					Debug.Log (hep.hp);
 					clonedversion.GetComponentInChildren<Text>().text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
 					clonedversion.GetComponentInChildren<Image>().fillAmount = hep.hp/ hep.maxhp;
@@ -100,8 +100,8 @@ public class mining : MonoBehaviour {
 			clonedversion.GetComponentInChildren<Text>().text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
 			barcloned.fillAmount = hep.hp/hep.maxhp;
 			clonedversion.transform.LookAt (cam.transform.position);
-			clonedversion.transform.localPosition = new Vector3 (0, -6f, 0);
-			clonedversion.transform.Translate (Vector3.forward * 1f);
+			clonedversion.transform.localPosition = new Vector3 (0, -8f, 0);
+			clonedversion.transform.Translate (Vector3.forward * 2f);
 		}
 }
 }
