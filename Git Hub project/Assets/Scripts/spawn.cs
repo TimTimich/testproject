@@ -50,6 +50,7 @@ public class spawn : MonoBehaviour {
 	void Update () {
 		if (killed == false) {
 			if (healthscript.growing == true) {
+				clonedversion.transform.Rotate (0, 100f * Time.deltaTime, 0);
 				if (clonedversion.transform.localScale.x < maxgrowscale.x) {
 					if (allowregenrate == true) {
 						if (healthscript.hp < totalhp) {
@@ -70,7 +71,6 @@ public class spawn : MonoBehaviour {
 				} else if (clonedversion.transform.localScale.x > maxgrowscale.x) {
 
 					healthscript.growing = false;
-					print (healthscript.growing);
 				}
 			} else if (healthscript.growing == false) {
 				
@@ -91,7 +91,7 @@ public class spawn : MonoBehaviour {
 		
 		print ("wait has started");
 		StopCoroutine (Test());
-		yield return new WaitForSeconds (180);
+		yield return new WaitForSeconds (Random.Range(60,180));
 		Start ();
 
 	}
