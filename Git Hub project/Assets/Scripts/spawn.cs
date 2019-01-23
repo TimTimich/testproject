@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class spawn : MonoBehaviour {
 	public healthobject healthscript;
-	public float totalhp;
+	public float maxhp;
+	public float starthp;
 	public GameObject tospawn;
 	public GameObject clonedversion;
 	public GameObject clonedtrunk;
@@ -12,7 +13,7 @@ public class spawn : MonoBehaviour {
 	public Vector3 maxgrowscale;
 	public Vector3 leavesallowed;
 	public float growrate = 0.0001f;
-	private bool allowregenrate = true;
+
 	[SerializeField]
 	public bool killed = false;
 	private Quaternion quaternion;
@@ -29,12 +30,10 @@ public class spawn : MonoBehaviour {
 	// Use this for initialization
 	IEnumerator Start () {
 		started = true;
-		allowregenrate = true;
 		gameObject.GetComponent<MeshRenderer> ().enabled = false;
-		yield return new WaitForSeconds(Random.Range(5,30));
-		
-		killed = false;
 
+		yield return new WaitForSeconds(Random.Range(5,30));
+		killed = false;
 		gameObject.GetComponent<MeshRenderer> ().enabled = false;
 		xstart = tospawn.transform.localScale.x*2;
 		ystart = tospawn.transform.localScale.y*2;
@@ -47,11 +46,8 @@ public class spawn : MonoBehaviour {
 		healthscript = clonedversion.GetComponentInChildren<healthobject> ();
 		leaves = clonedversion.GetComponent<MeshRenderer> ();
 		leaves.enabled = false;
-		healthscript.hp = 1f;
-		totalhp = healthscript.maxhp;
-		healthscript.hp = totalhp/100;
-		beginreward = new Vector2(1f,1f);
-		endreward = new Vector2(5f,6f);
+		maxhp = healthscript.maxhp;
+		healthscript.hp = maxhp;
 		started = false;
 	}
 	
@@ -62,15 +58,6 @@ public class spawn : MonoBehaviour {
 				if (healthscript.growing == true) {
 					clonedversion.transform.Rotate (0, 100f * Time.deltaTime, 0);
 					if (clonedversion.transform.localScale.x < maxgrowscale.x) {
-						if (allowregenrate == true) {
-							if (healthscript.hp < totalhp) {
-								healthscript.hp += growrate*2/5;
-							} else {
-								allowregenrate = false;
-
-							}
-						}
-						//print(healthscript.hp);
 						healthscript.growing = true;
 						clonedversion.transform.localScale += new Vector3 (growrate * Time.deltaTime, growrate * Time.deltaTime, growrate * Time.deltaTime);
 						clonedversion.transform.position += new Vector3 (0f, growrate * 0.03f, 0f);
@@ -82,8 +69,6 @@ public class spawn : MonoBehaviour {
 						healthscript.growing = false;
 
 					}
-				} else if (healthscript.growing == false) {
-					
 				}
 			} else {
 				StartCoroutine (Test ());

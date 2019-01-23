@@ -15,6 +15,7 @@ public class Popup : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.E)) {
+			
 			Cursor.lockState = CursorLockMode.None  ;
 			Cursor.visible = true;
 			Debug.Log ("down");

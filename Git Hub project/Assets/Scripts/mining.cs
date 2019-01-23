@@ -12,15 +12,20 @@ public class mining : MonoBehaviour {
 	public float range = 5f;
 	public float reset = 0.5f;
 	public float firerate = 1f;
-	public GameObject clonedversion;
-	private bool exists = false;
 	private float nextimetofire=0f;
 	public Camera cam;
 	public inventory inv;
 	public healthobject hep;
 	public Image barcloned;
-	// Use this for initialization
+	RaycastHit hit;
+	GameObject target;
+	Renderer m_Renderer;
+
+	private bool found = false;
+
+
 	void Start () {
+		found = false;
 	}
 	
 	// Update is called once per frame
@@ -31,30 +36,23 @@ public class mining : MonoBehaviour {
 		if (Input.GetButton ("Fire1")&&Time.time >= nextimetofire) {
 	
 			nextimetofire = Time.time + 1f / firerate;
-			RaycastHit hit;
+
 			if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, range)) {
 				if (hit.transform.CompareTag ("interact")) {
-					if (exists==false) {
-						exists = true;
-						clonedversion = Instantiate (healthcavas);
-
-					}
-					clonedversion.transform.SetParent (hit.transform);
-					clonedversion.transform.localPosition = new Vector3 (0, 0, 0);
-					clonedversion.transform.LookAt (cam.transform.position);
-					clonedversion.transform.Translate (Vector3.forward * 1.5f);
+					
 					spawnscript = hit.transform.parent.transform.parent.GetComponent<spawn> ();
-					barcloned = clonedversion.transform.GetChild (0).transform.GetChild(0).GetComponent<Image>();
 					print (barcloned.transform.name);
 					hep = hit.transform.GetComponent<healthobject> ();
+					m_Renderer = hit.transform.GetComponent<MeshRenderer> ();
 					Vector2 endhitgive = spawnscript.endreward;
 					Vector2 beginhitgive = spawnscript.beginreward;
-					GameObject target = hep.target;
+					target = hep.target;
+					found = true;
 					hep.hp -= damage;
-					Mathf.Floor (hep.hp);
+
 					Debug.Log (hep.hp);
-					clonedversion.GetComponentInChildren<Text>().text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
-					clonedversion.GetComponentInChildren<Image>().fillAmount = hep.hp/ hep.maxhp;
+					healthtext.text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
+					barcloned.fillAmount = hep.hp/ hep.maxhp;
 					if (hep.hp >= hep.maxhp*(2/4)) {
 						
 						if (hep.mat == "MatWood") {
@@ -73,18 +71,19 @@ public class mining : MonoBehaviour {
 						}
 					}
 					if (hep.hp > 0) {
-						clonedversion.GetComponentInChildren<Text>().text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
-						clonedversion.GetComponentInChildren<Image>().fillAmount = hep.hp/ hep.maxhp;
+						healthtext.text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
+						barcloned.fillAmount = hep.hp/ hep.maxhp;
+						print (spawnscript.killed);
 					}
 					else{
-						clonedversion.transform.position = new Vector3 (0, 0, 0);
 
 					if (hep.hp <= 0) {
 						spawnscript.killed = true;
+						found = false;
 						hep.growing = false;
+						print (spawnscript.killed);
 
 						Debug.Log ("killed");
-							exists = false;
 						Destroy (target.gameObject);
 						//Destroy (hit);
 					}
@@ -96,12 +95,32 @@ public class mining : MonoBehaviour {
 		}
 
 	}
-		if (clonedversion != null) {
-			clonedversion.GetComponentInChildren<Text>().text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
-			barcloned.fillAmount = hep.hp/hep.maxhp;
-			clonedversion.transform.LookAt (cam.transform.position);
-			clonedversion.transform.localPosition = new Vector3 (0, -8f, 0);
-			clonedversion.transform.Translate (Vector3.forward * 2f);
+
+			if (found==true) {
+				if (spawnscript.killed == false) {
+					print ("false");
+					if (m_Renderer.isVisible) {
+						if (Vector3.Distance (cam.transform.position, target.transform.position) < 15f) {
+							var guiPosition = Camera.main.WorldToScreenPoint (hit.transform.position-new Vector3(0,hit.transform.localScale.y*5f,0));
+							healthcavas.transform.GetChild (0).transform.position = guiPosition;
+							healthcavas.SetActive (true);
+						} else {
+							healthcavas.SetActive (false);
+						}
+					}
+					else {
+						print ("not visible");
+						healthcavas.SetActive (false);
+					}
+
+
+				} 
+
+			}
+		else if (found == false) {
+			healthcavas.SetActive (false);
+			print ("not found");
 		}
-}
+
+	}
 }

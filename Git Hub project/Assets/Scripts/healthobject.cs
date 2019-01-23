@@ -5,6 +5,7 @@ using UnityEngine;
 public class healthobject : MonoBehaviour {
 	public float hp = 100f;
 	public float maxhp = 100f;
+	public float beginhp = 1f;
 	public string mat;
 
 	public GameObject target;
@@ -13,11 +14,11 @@ public class healthobject : MonoBehaviour {
 	void Start () {
 
 		growing = true;
-		Mathf.Ceil (hp);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Mathf.Floor (hp);
+
 	}
 }
