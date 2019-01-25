@@ -44,8 +44,8 @@ public class mining : MonoBehaviour {
 					print (barcloned.transform.name);
 					hep = hit.transform.GetComponent<healthobject> ();
 					m_Renderer = hit.transform.GetComponent<MeshRenderer> ();
-					Vector2 endhitgive = spawnscript.endreward;
-					Vector2 beginhitgive = spawnscript.beginreward;
+					//Vector2 endhitgive = spawnscript.endreward;
+					//Vector2 beginhitgive = spawnscript.beginreward;
 					target = hep.target;
 					found = true;
 					hep.hp -= damage;
@@ -53,7 +53,7 @@ public class mining : MonoBehaviour {
 					Debug.Log (hep.hp);
 					healthtext.text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
 					barcloned.fillAmount = hep.hp/ hep.maxhp;
-					if (hep.hp >= hep.maxhp*(2/4)) {
+					/*if (hep.hp >= hep.maxhp*(2/4)) {
 						
 						if (hep.mat == "MatWood") {
 							inv.woodcount += Random.Range (endhitgive.x, endhitgive.y);
@@ -70,6 +70,7 @@ public class mining : MonoBehaviour {
 							inv.stonecount += Random.Range (beginhitgive.x, beginhitgive.y);
 						}
 					}
+                    */
 					if (hep.hp > 0) {
 						healthtext.text= "" + Mathf.Ceil(hep.hp)+"/" + hep.maxhp;
 						barcloned.fillAmount = hep.hp/ hep.maxhp;
@@ -101,7 +102,7 @@ public class mining : MonoBehaviour {
 					print ("false");
 					if (m_Renderer.isVisible) {
 						if (Vector3.Distance (cam.transform.position, target.transform.position) < 15f) {
-							var guiPosition = Camera.main.WorldToScreenPoint (hit.transform.position-new Vector3(0,hit.transform.localScale.y*5f,0));
+							var guiPosition = Camera.main.WorldToScreenPoint (hit.transform.position-new Vector3(0,hit.transform.localScale.y*4,0));
 							healthcavas.transform.GetChild (0).transform.position = guiPosition;
 							healthcavas.SetActive (true);
 						} else {
@@ -109,7 +110,6 @@ public class mining : MonoBehaviour {
 						}
 					}
 					else {
-						print ("not visible");
 						healthcavas.SetActive (false);
 					}
 
@@ -119,7 +119,6 @@ public class mining : MonoBehaviour {
 			}
 		else if (found == false) {
 			healthcavas.SetActive (false);
-			print ("not found");
 		}
 
 	}

@@ -180,6 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  maxhp: 100
+  beginhp: 1
   mat: MatWood
-  reward: {x: 5, y: 6}
+  MatType: WoodPine
   target: {fileID: 1489833539222844}
+  growing: 0

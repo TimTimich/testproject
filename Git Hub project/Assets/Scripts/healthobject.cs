@@ -6,7 +6,7 @@ public class healthobject : MonoBehaviour {
 	public float hp = 100f;
 	public float maxhp = 100f;
 	public float beginhp = 1f;
-	public string mat;
+	public string GiveType;
 
 	public GameObject target;
 	public  bool growing;
